@@ -1,0 +1,10 @@
+export const ADMIN_LOGIN = "/sanctum";
+export const ADMIN_PANEL = "/sanctum/control";
+export const ADMIN_DASHBOARD = `${ADMIN_PANEL}/dashboard`;
+export const ADMIN_ANALYTICS = `${ADMIN_PANEL}/analytics`;
+export const ADMIN_SITE = `${ADMIN_PANEL}/site`;
+export const ADMIN_USERS = `${ADMIN_PANEL}/users`;
+export const ADMIN_HELP = `${ADMIN_PANEL}/help`;
+export const ADMIN_AUDIT = `${ADMIN_PANEL}/audit`;
+export const adminResourcePath = (key: string) => `${ADMIN_PANEL}/${key}`;
+export const isAdminPath = (path: string) => path.startsWith("/sanctum");

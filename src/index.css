@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-white font-body text-gray-900 antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-heading;
+  }
+
+  ::selection {
+    @apply bg-florante-700 text-white;
+  }
+
+  ::-webkit-scrollbar        { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track  { @apply bg-florante-50; }
+  ::-webkit-scrollbar-thumb  { @apply rounded-full bg-florante-200; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-florante-300; }
+}
+
+@layer components {
+  /* ─── Layout ─────────────────────────────────────────── */
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .container-narrow {
+    @apply mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-10;
+  }
+
+  /* ─── Typography ─────────────────────────────────────── */
+  .text-gradient {
+    @apply bg-gradient-to-br from-florante-600 via-florante-700 to-florante-900 bg-clip-text text-transparent;
+  }
+  .text-gradient-bright {
+    @apply bg-gradient-to-br from-accent-soft via-accent to-florante-200 bg-clip-text text-transparent;
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-florante-200 bg-florante-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-florante-700;
+  }
+  .eyebrow-dark {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent-soft backdrop-blur;
+  }
+  .eyebrow-accent {
+    @apply inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent-dark;
+  }
+
+  /* ─── Cards ──────────────────────────────────────────── */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lift;
+  }
+  .glass-dark {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+  .glass-light {
+    @apply border border-florante-100 bg-white/80 backdrop-blur-md shadow-soft;
+  }
+
+  /* ─── Shimmer text ───────────────────────────────────── */
+  .shimmer-text {
+    background: linear-gradient(
+      100deg,
+      rgba(255,255,255,0.55) 40%,
+      rgba(255,255,255,1)    50%,
+      rgba(255,255,255,0.55) 60%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3.2s linear infinite;
+  }
+
+  /* ─── Prose ─────────────────────────────────────────── */
+  .prose-florante h2 { @apply mt-10 font-heading text-2xl font-bold text-florante-800; }
+  .prose-florante h3 { @apply mt-8  font-heading text-xl  font-semibold text-florante-800; }
+  .prose-florante p  { @apply mt-4 text-gray-600; }
+  .prose-florante ul { @apply mt-4 space-y-2 pl-1; }
+  .prose-florante li { @apply flex gap-2.5 text-gray-600; }
+  .prose-florante li::before {
+    content: "";
+    @apply mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent;
+  }
+  .prose-florante strong  { @apply font-semibold text-florante-800; }
+  .prose-florante blockquote {
+    @apply mt-6 rounded-2xl border-l-4 border-accent bg-florante-50/60 p-5 text-gray-600;
+  }
+
+  /* ─── Marquee ────────────────────────────────────────── */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right,transparent,black 12%,black 88%,transparent);
+    mask-image:         linear-gradient(to right,transparent,black 12%,black 88%,transparent);
+  }
+
+  /* ─── Stat card ─────────────────────────────────────── */
+  .stat-card {
+    @apply relative overflow-hidden rounded-2xl border border-florante-100 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift;
+  }
+
+  /* ─── Nav mega menu item ────────────────────────────── */
+  .mega-item {
+    @apply flex items-start gap-3 rounded-xl p-3 transition-colors duration-150 hover:bg-white/10;
+  }
+  .mega-item-light {
+    @apply flex items-start gap-3 rounded-xl p-3 transition-colors duration-150 hover:bg-florante-50;
+  }
+
+  /* ─── Pill badge ─────────────────────────────────────── */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .pill-green  { @apply bg-accent/10  text-accent-dark; }
+  .pill-amber  { @apply bg-amber-50   text-amber-600; }
+  .pill-indigo { @apply bg-indigo-50  text-indigo-600; }
+  .pill-rose   { @apply bg-rose-50    text-rose-600; }
+  .pill-sky    { @apply bg-sky-50     text-sky-600; }
+  .pill-violet { @apply bg-violet-50  text-violet-600; }
+
+  /* ─── Section divider ───────────────────────────────── */
+  .section-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(26,71,42,0.15) 30%, rgba(26,71,42,0.15) 70%, transparent);
+  }
+
+  /* ─── Admin ──────────────────────────────────────────── */
+  .admin-corners::before, .admin-corners::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index: 1;
+  }
+  .admin-corners::before {
+    top: -1px; left: -1px;
+    border-top:  2px solid rgba(74,222,128,0.85);
+    border-left: 2px solid rgba(74,222,128,0.85);
+    border-top-left-radius: 1.5rem;
+  }
+  .admin-corners::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 2px solid rgba(74,222,128,0.85);
+    border-right:  2px solid rgba(74,222,128,0.85);
+    border-bottom-right-radius: 1.5rem;
+  }
+  .admin-index {
+    @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-florante-50 font-heading text-sm font-bold text-florante-700;
+  }
+  .admin-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(26,71,42,0.18) 30%, rgba(26,71,42,0.18) 70%, transparent);
+  }
+  .editorial-link {
+    @apply relative grid gap-2.5 border-t border-florante-100 py-7 transition-colors hover:bg-moss/40 md:grid-cols-[3rem_1fr_auto] md:items-center md:gap-8 md:px-5 md:-mx-5;
+  }
+  .editorial-link:last-child { @apply border-b; }
+  .editorial-num   { @apply font-mono text-sm font-bold text-florante-400 transition-colors group-hover:text-accent-dark; }
+  .editorial-arrow { @apply inline-flex items-center gap-2 text-sm font-semibold text-florante-700 transition-colors group-hover:text-florante-900; }
+  .editorial-list  { @apply border-t border-florante-100; }
+
+  /* ─── Talk modal ─────────────────────────────────────── */
+  .modal-backdrop {
+    @apply fixed inset-0 z-[200] flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm sm:items-center sm:p-4;
+  }
+  .modal-panel {
+    @apply relative w-full max-w-lg overflow-hidden rounded-t-[2rem] bg-white shadow-mega sm:rounded-[2rem];
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:       0.01ms !important;
+    animation-iteration-count: 1    !important;
+    transition-duration:      0.01ms !important;
+  }
+}
