@@ -176,8 +176,31 @@ export function Navbar() {
         </div>
 
         <nav className="container-page flex h-[4.5rem] items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="group flex items-center gap-2.5 shrink-0">
+          {/* Mobile Left: Hamburger Menu & Logo */}
+          <div className="flex items-center gap-2.5 lg:hidden">
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 active:scale-95"
+              onClick={() => setOpen(true)}
+              aria-label="Open sidebar menu"
+              aria-expanded={open}
+            >
+              <IconMenu size={20} />
+            </button>
+            <Link to="/" className="group flex items-center gap-2 shrink-0">
+              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/10 backdrop-blur">
+                <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
+                  <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
+                  <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="font-heading text-base font-bold tracking-tight text-white">
+                Florante<span className="text-accent">.</span>
+              </span>
+            </Link>
+          </div>
+
+          {/* Desktop Logo */}
+          <Link to="/" className="hidden lg:flex group items-center gap-2.5 shrink-0">
             <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white/10 backdrop-blur">
               <svg width="20" height="20" viewBox="0 0 48 48" fill="none" className="text-accent">
                 <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
@@ -264,7 +287,7 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Right Controls */}
+          {/* Mobile Right Actions */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={openSearch}
@@ -274,88 +297,119 @@ export function Navbar() {
               <IconSearch size={18} />
             </button>
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
-              onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-              aria-expanded={open}
+              onClick={() => openModal()}
+              className="rounded-full bg-accent-grad px-3.5 py-2 text-xs font-bold text-florante-950 shadow-glow-sm"
             >
-              {open ? <IconClose size={20} /> : <IconMenu size={20} />}
+              Talk
             </button>
           </div>
         </nav>
 
-        {/* Mobile drawer */}
+        {/* Mobile Off-Canvas Left Sidebar Drawer */}
         {open && (
-          <div className="fixed inset-0 top-[4.5rem] z-50 border-t border-white/10 bg-[#06190e] lg:hidden overflow-y-auto">
-            <div className="container-page py-6 min-h-[calc(100vh-4.5rem)] flex flex-col justify-between">
-              <div className="space-y-1">
-                {NAV_GROUPS.map((group) => (
-                  <div key={group.label} className="border-b border-white/10 last:border-0">
-                    {group.children ? (
-                      <>
-                        <button
-                          onClick={() => setMobileGroup(mobileGroup === group.label ? null : group.label)}
-                          className="flex w-full items-center justify-between py-3.5 text-base font-semibold text-white"
+          <div className="fixed inset-0 z-50 lg:hidden">
+            {/* Dark Backdrop Overlay */}
+            <div
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+              onClick={() => setOpen(false)}
+            />
+
+            {/* Left Sidebar Drawer Container */}
+            <div className="fixed inset-y-0 left-0 z-50 flex w-[84vw] max-w-xs flex-col justify-between border-r border-white/10 bg-[#06190e] p-5 shadow-2xl overflow-y-auto animate-slide-right">
+              <div>
+                {/* Sidebar Header */}
+                <div className="flex items-center justify-between pb-5 border-b border-white/10">
+                  <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 backdrop-blur">
+                      <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
+                        <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
+                        <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span className="font-heading text-base font-bold text-white">
+                      Florante<span className="text-accent">.</span>
+                    </span>
+                  </Link>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/20 transition"
+                    aria-label="Close menu"
+                  >
+                    <IconClose size={18} />
+                  </button>
+                </div>
+
+                {/* Nav Links */}
+                <div className="mt-4 space-y-1">
+                  {NAV_GROUPS.map((group) => (
+                    <div key={group.label} className="border-b border-white/10 last:border-0">
+                      {group.children ? (
+                        <>
+                          <button
+                            onClick={() => setMobileGroup(mobileGroup === group.label ? null : group.label)}
+                            className="flex w-full items-center justify-between py-3 text-sm font-semibold text-white hover:text-accent"
+                          >
+                            {group.label}
+                            <svg width="12" height="12" viewBox="0 0 12 12" className={`transition-transform duration-200 ${mobileGroup === group.label ? "rotate-180" : ""}`}>
+                              <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                            </svg>
+                          </button>
+                          {mobileGroup === group.label && (
+                            <div className="mb-3 space-y-1 pl-2">
+                              {group.children.flatMap((s) => s.items).map((item) => (
+                                <Link
+                                  key={item.href}
+                                  to={item.href}
+                                  onClick={() => setOpen(false)}
+                                  className="flex items-center gap-3 rounded-xl px-3 py-2 bg-white/5 transition-colors hover:bg-white/15"
+                                >
+                                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                                    {item.icon}
+                                  </span>
+                                  <span className="text-xs font-medium text-white">{item.label}</span>
+                                </Link>
+                              ))}
+                              {group.href && (
+                                <Link
+                                  to={group.href}
+                                  onClick={() => setOpen(false)}
+                                  className="mt-1 flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-accent"
+                                >
+                                  View all {group.label.toLowerCase()} <IconArrowRight size={12} />
+                                </Link>
+                              )}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <NavLink
+                          to={group.href!}
+                          end={false}
+                          onClick={() => setOpen(false)}
+                          className={({ isActive }) =>
+                            `block py-3 text-sm font-semibold transition-colors ${isActive ? "text-accent" : "text-white hover:text-accent"}`
+                          }
                         >
                           {group.label}
-                          <svg width="14" height="14" viewBox="0 0 12 12" className={`transition-transform duration-200 ${mobileGroup === group.label ? "rotate-180" : ""}`}>
-                            <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                          </svg>
-                        </button>
-                        {mobileGroup === group.label && (
-                          <div className="mb-4 space-y-1 pl-2">
-                            {group.children.flatMap((s) => s.items).map((item) => (
-                              <Link
-                                key={item.href}
-                                to={item.href}
-                                onClick={() => setOpen(false)}
-                                className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-white/5 transition-colors hover:bg-white/15"
-                              >
-                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
-                                  {item.icon}
-                                </span>
-                                <span className="text-sm font-medium text-white">{item.label}</span>
-                              </Link>
-                            ))}
-                            {group.href && (
-                              <Link
-                                to={group.href}
-                                onClick={() => setOpen(false)}
-                                className="mt-2 flex items-center gap-2 px-3 py-2 text-xs font-semibold text-accent"
-                              >
-                                View all {group.label.toLowerCase()} <IconArrowRight size={12} />
-                              </Link>
-                            )}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <NavLink
-                        to={group.href!}
-                        end={false}
-                        onClick={() => setOpen(false)}
-                        className={({ isActive }) =>
-                          `block py-3.5 text-base font-semibold transition-colors ${isActive ? "text-accent" : "text-white"}`
-                        }
-                      >
-                        {group.label}
-                      </NavLink>
-                    )}
-                  </div>
-                ))}
+                        </NavLink>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="mt-8 flex flex-col gap-3 pb-8 pt-4 border-t border-white/10">
+              {/* Sidebar Footer Actions */}
+              <div className="mt-6 flex flex-col gap-2.5 pt-4 border-t border-white/10">
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full border border-white/25 bg-white/5 px-5 py-3.5 text-center text-sm font-semibold text-white hover:bg-white/15 transition"
+                  className="block rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-center text-xs font-semibold text-white hover:bg-white/15 transition"
                 >
-                  Contact
+                  Contact Us
                 </Link>
                 <button
                   onClick={() => { openModal(); setOpen(false); }}
-                  className="block rounded-full bg-accent-grad px-5 py-3.5 text-center text-sm font-semibold text-florante-950 shadow-glow-sm transition hover:brightness-105"
+                  className="block rounded-full bg-accent-grad px-4 py-2.5 text-center text-xs font-bold text-florante-950 shadow-glow-sm transition hover:brightness-105"
                 >
                   Talk to Florante →
                 </button>

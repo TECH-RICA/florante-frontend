@@ -49,9 +49,9 @@ export function Footer() {
       <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-florante-500/15 blur-3xl" />
 
       <div className="container-page relative">
-        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr]">
+        <div className="grid grid-cols-2 gap-8 border-b border-white/10 py-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] lg:gap-12 lg:py-16">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 backdrop-blur">
                 <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
@@ -63,10 +63,10 @@ export function Footer() {
                 Florante<span className="text-accent">.</span>
               </span>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-florante-100/80">
-              Intelligent, secure technology built for African organizations to operate smarter, scale faster and compete globally.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-florante-100/80">
+              Intelligent, blooming technology built for African organizations to operate smarter, scale faster and compete globally.
             </p>
-            <div className="mt-6 flex gap-2.5">
+            <div className="mt-5 flex gap-2.5">
               {socials.map(({ label, href, Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-florante-100/70 transition-all hover:border-accent/50 hover:bg-accent/10 hover:text-accent">
@@ -74,7 +74,7 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <ul className="mt-6 space-y-2.5 text-sm text-florante-100/80">
+            <ul className="mt-5 space-y-2 text-sm text-florante-100/80">
               <li>
                 <a href="mailto:florantej@gmail.com" className="flex items-center gap-2.5 transition-colors hover:text-white">
                   <IconMail size={14} className="text-accent" /> florantej@gmail.com
@@ -93,9 +93,9 @@ export function Footer() {
 
           {/* Nav columns */}
           {columns.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="col-span-1">
               <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent-soft/80">{col.title}</h4>
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
                     <Link to={l.href} className="text-sm text-florante-100/75 transition-colors hover:text-white">
@@ -108,12 +108,12 @@ export function Footer() {
           ))}
 
           {/* CTA */}
-          <div>
+          <div className="col-span-2 sm:col-span-1 lg:col-span-1">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent-soft/80">Start a project</h4>
-            <p className="mt-5 text-sm leading-relaxed text-florante-100/70">
+            <p className="mt-4 text-sm leading-relaxed text-florante-100/70">
               Tell us what you're building. We'll show you the fastest way to make it real.
             </p>
-            <Link to="/contact" className="group mt-5 inline-flex items-center gap-2 rounded-full bg-accent-grad px-5 py-2.5 text-sm font-semibold text-florante-950 shadow-glow-sm transition-all hover:brightness-105">
+            <Link to="/contact" className="group mt-4 inline-flex items-center gap-2 rounded-full bg-accent-grad px-5 py-2.5 text-sm font-semibold text-florante-950 shadow-glow-sm transition-all hover:brightness-105">
               Get in touch
               <IconArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
