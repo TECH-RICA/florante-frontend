@@ -64,20 +64,20 @@ export function Home() {
             <Reveal>
               <span className="eyebrow-dark shadow-sm">
                 <IconGlobe size={13} className="text-accent animate-pulse" />
-                Built in Africa · Designed to scale globally
+                Built in Africa · Blooming Technology Designed to Scale Globally
               </span>
             </Reveal>
             <Reveal delay={90}>
               <h1 className="mx-auto mt-5 max-w-3xl font-heading text-3xl font-bold leading-[1.15] tracking-tightest sm:mt-6 sm:text-5xl lg:text-[4.2rem]">
-                Intelligent Technology{" "}
-                <span className="text-gradient-bright">Built for Africa's</span>{" "}
-                Digital Future
+                Intelligent & Blooming{" "}
+                <span className="text-gradient-bright">Technology Built for</span>{" "}
+                Africa's Digital Future
               </h1>
             </Reveal>
             <Reveal delay={180}>
               <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-florante-100/90 sm:mt-6 sm:text-lg">
-                We build secure, intelligent technology systems that help African businesses
-                and institutions operate smarter, scale faster and compete globally.
+                Florante builds secure, blooming technology systems that help African businesses
+                and institutions operate smarter, scale faster, and flourish globally.
               </p>
             </Reveal>
             <Reveal delay={270}>

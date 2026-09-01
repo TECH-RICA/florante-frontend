@@ -147,6 +147,15 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  useEffect(() => {
     setOpen(false);
     setActiveMenu(null);
   }, [location.pathname]);
@@ -277,73 +286,76 @@ export function Navbar() {
 
         {/* Mobile drawer */}
         {open && (
-          <div className="absolute inset-x-0 top-[4.5rem] z-50 border-t border-white/10 bg-florante-950/98 backdrop-blur-xl lg:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto">
-            <div className="container-page py-4">
-              {NAV_GROUPS.map((group) => (
-                <div key={group.label} className="border-b border-white/8 last:border-0">
-                  {group.children ? (
-                    <>
-                      <button
-                        onClick={() => setMobileGroup(mobileGroup === group.label ? null : group.label)}
-                        className="flex w-full items-center justify-between py-3 text-sm font-semibold text-white"
+          <div className="fixed inset-0 top-[4.5rem] z-50 border-t border-white/10 bg-[#06190e] lg:hidden overflow-y-auto">
+            <div className="container-page py-6 min-h-[calc(100vh-4.5rem)] flex flex-col justify-between">
+              <div className="space-y-1">
+                {NAV_GROUPS.map((group) => (
+                  <div key={group.label} className="border-b border-white/10 last:border-0">
+                    {group.children ? (
+                      <>
+                        <button
+                          onClick={() => setMobileGroup(mobileGroup === group.label ? null : group.label)}
+                          className="flex w-full items-center justify-between py-3.5 text-base font-semibold text-white"
+                        >
+                          {group.label}
+                          <svg width="14" height="14" viewBox="0 0 12 12" className={`transition-transform duration-200 ${mobileGroup === group.label ? "rotate-180" : ""}`}>
+                            <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                          </svg>
+                        </button>
+                        {mobileGroup === group.label && (
+                          <div className="mb-4 space-y-1 pl-2">
+                            {group.children.flatMap((s) => s.items).map((item) => (
+                              <Link
+                                key={item.href}
+                                to={item.href}
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-white/5 transition-colors hover:bg-white/15"
+                              >
+                                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                                  {item.icon}
+                                </span>
+                                <span className="text-sm font-medium text-white">{item.label}</span>
+                              </Link>
+                            ))}
+                            {group.href && (
+                              <Link
+                                to={group.href}
+                                onClick={() => setOpen(false)}
+                                className="mt-2 flex items-center gap-2 px-3 py-2 text-xs font-semibold text-accent"
+                              >
+                                View all {group.label.toLowerCase()} <IconArrowRight size={12} />
+                              </Link>
+                            )}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <NavLink
+                        to={group.href!}
+                        end={false}
+                        onClick={() => setOpen(false)}
+                        className={({ isActive }) =>
+                          `block py-3.5 text-base font-semibold transition-colors ${isActive ? "text-accent" : "text-white"}`
+                        }
                       >
                         {group.label}
-                        <svg width="14" height="14" viewBox="0 0 12 12" className={`transition-transform duration-200 ${mobileGroup === group.label ? "rotate-180" : ""}`}>
-                          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        </svg>
-                      </button>
-                      {mobileGroup === group.label && (
-                        <div className="mb-3 space-y-1 pl-2">
-                          {group.children.flatMap((s) => s.items).map((item) => (
-                            <Link
-                              key={item.href}
-                              to={item.href}
-                              onClick={() => setOpen(false)}
-                              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/10"
-                            >
-                              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/8 text-accent">
-                                {item.icon}
-                              </span>
-                              <span className="text-sm font-medium text-white/85">{item.label}</span>
-                            </Link>
-                          ))}
-                          {group.href && (
-                            <Link
-                              to={group.href}
-                              onClick={() => setOpen(false)}
-                              className="mt-1 flex items-center gap-2 px-3 py-2 text-xs font-semibold text-accent"
-                            >
-                              View all {group.label.toLowerCase()} <IconArrowRight size={12} />
-                            </Link>
-                          )}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <NavLink
-                      to={group.href!}
-                      end={false}
-                      onClick={() => setOpen(false)}
-                      className={({ isActive }) =>
-                        `block py-3 text-sm font-semibold transition-colors ${isActive ? "text-accent" : "text-white"}`
-                      }
-                    >
-                      {group.label}
-                    </NavLink>
-                  )}
-                </div>
-              ))}
-              <div className="mt-4 flex flex-col gap-2.5 pb-4">
+                      </NavLink>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3 pb-8 pt-4 border-t border-white/10">
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="block rounded-full border border-white/20 px-5 py-3 text-center text-sm font-semibold text-white"
+                  className="block rounded-full border border-white/25 bg-white/5 px-5 py-3.5 text-center text-sm font-semibold text-white hover:bg-white/15 transition"
                 >
                   Contact
                 </Link>
                 <button
                   onClick={() => { openModal(); setOpen(false); }}
-                  className="block rounded-full bg-accent-grad px-5 py-3 text-center text-sm font-semibold text-florante-950 shadow-glow-sm"
+                  className="block rounded-full bg-accent-grad px-5 py-3.5 text-center text-sm font-semibold text-florante-950 shadow-glow-sm transition hover:brightness-105"
                 >
                   Talk to Florante →
                 </button>
