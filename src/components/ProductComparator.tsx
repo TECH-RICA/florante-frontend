@@ -28,8 +28,11 @@ export function ProductComparator({ isOpen, onClose }: { isOpen: boolean; onClos
   const selectedProducts = DEFAULT_PRODUCTS.filter((p) => selectedSlugs.includes(p.slug));
 
   return (
-    <div className="modal-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="modal-panel animate-scale-in max-w-4xl bg-white shadow-mega rounded-3xl overflow-hidden my-auto mx-2 sm:mx-auto max-h-[90vh] flex flex-col">
+    <div
+      className="modal-backdrop-root"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="modal-panel-blooming-wide no-scrollbar flex flex-col my-auto mx-2 sm:mx-auto">
         {/* Header */}
         <div className="relative flex items-center justify-between bg-green-grad px-6 py-5 text-white shrink-0">
           <div>
@@ -43,7 +46,10 @@ export function ProductComparator({ isOpen, onClose }: { isOpen: boolean; onClos
               Select up to 3 products to compare capabilities, pricing models, and deployment readiness.
             </p>
           </div>
-          <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20">
+          <button
+            onClick={onClose}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
             <IconClose size={16} />
           </button>
         </div>
@@ -58,11 +64,10 @@ export function ProductComparator({ isOpen, onClose }: { isOpen: boolean; onClos
                 <button
                   key={p.slug}
                   onClick={() => toggleProduct(p.slug)}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
-                    active
+                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${active
                       ? "bg-florante-700 text-white shadow-sm"
                       : "bg-white text-gray-600 border border-florante-200 hover:border-florante-400"
-                  }`}
+                    }`}
                 >
                   {active && "✓ "}
                   {p.name}
@@ -73,7 +78,7 @@ export function ProductComparator({ isOpen, onClose }: { isOpen: boolean; onClos
         </div>
 
         {/* Comparison Table */}
-        <div className="overflow-y-auto p-4 sm:p-6 flex-1">
+        <div className="overflow-y-auto p-4 sm:p-6 flex-1 bg-white">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {selectedProducts.map((p) => (
               <div key={p.slug} className="flex flex-col rounded-2xl border border-florante-100 bg-white p-5 shadow-soft justify-between">
@@ -113,7 +118,7 @@ export function ProductComparator({ isOpen, onClose }: { isOpen: boolean; onClos
                       onClose();
                       openModal({ product: p.name, need: "Product Demo" });
                     }}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-full bg-florante-700 py-2.5 text-xs font-semibold text-white transition-all hover:bg-florante-800"
+                    className="w-full flex items-center justify-center gap-1.5 rounded-full bg-florante-700 py-2.5 text-xs font-semibold text-white transition-all hover:bg-florante-800 shadow-sm"
                   >
                     Request Demo for {p.name.split(" ")[0]}
                     <IconArrowRight size={13} />

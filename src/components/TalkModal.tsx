@@ -43,10 +43,10 @@ const EMPTY: FormData = {
 
 export function TalkModal() {
   const { isOpen, closeModal, defaults } = useTalkModal();
-  const [form, setForm]     = useState<FormData>(EMPTY);
-  const [step, setStep]     = useState<Step>("form");
+  const [form, setForm] = useState<FormData>(EMPTY);
+  const [step, setStep] = useState<Step>("form");
   const [loading, setLoading] = useState(false);
-  const [error, setError]   = useState("");
+  const [error, setError] = useState("");
   const overlayRef = useRef<HTMLDivElement>(null);
 
   // Pre-fill from context
@@ -58,7 +58,7 @@ export function TalkModal() {
     }
   }, [isOpen, defaults]);
 
-  // Prevent body scroll
+  // Prevent body scroll and enforce fixed positioning layers
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -84,15 +84,15 @@ export function TalkModal() {
     setLoading(true); setError("");
     try {
       await api.post("leads/", {
-        name:         form.name,
+        name: form.name,
         organization: form.organization,
-        email:        form.email,
-        phone:        form.phone,
-        industry:     form.industry,
-        need:         form.need,
+        email: form.email,
+        phone: form.phone,
+        industry: form.industry,
+        need: form.need,
         budget_range: form.budget_range,
-        message:      form.message,
-        category:     "talk_to_florante",
+        message: form.message,
+        category: "talk_to_florante",
       });
       setStep("success");
     } catch {
@@ -107,10 +107,11 @@ export function TalkModal() {
   return (
     <div
       ref={overlayRef}
-      className="modal-backdrop"
+      className="modal-backdrop-root"
       onClick={(e) => { if (e.target === overlayRef.current) closeModal(); }}
     >
-      <div className="modal-panel animate-scale-in">
+      {/* Universal Modal Panel with Horizontal-to-Vertical Blooming Animation */}
+      <div className="modal-panel-blooming no-scrollbar">
         {/* Header */}
         <div className="relative flex items-start justify-between gap-4 bg-green-grad px-6 py-5">
           <div className="pointer-events-none absolute inset-0 bg-hero-mesh opacity-70" />
@@ -122,14 +123,14 @@ export function TalkModal() {
           </div>
           <button
             onClick={closeModal}
-            className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20"
+            className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
           >
             <IconClose size={16} />
           </button>
         </div>
 
         {step === "success" ? (
-          <div className="flex flex-col items-center px-6 py-12 text-center">
+          <div className="flex flex-col items-center px-6 py-12 text-center bg-white">
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/15 text-accent-dark">
               <IconCheck size={32} />
             </span>
@@ -141,20 +142,20 @@ export function TalkModal() {
               <a
                 href="https://wa.me/254770428297?text=Hello%20Florante%2C%20I%20just%20sent%20an%20enquiry%20and%20would%20like%20to%20connect."
                 target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] py-3 text-sm font-semibold text-white"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] py-3 text-sm font-semibold text-white shadow-md hover:opacity-90 transition-opacity"
               >
                 <IconWhatsApp size={16} /> Also reach us on WhatsApp
               </a>
               <button
                 onClick={closeModal}
-                className="rounded-full border border-florante-200 py-3 text-sm font-medium text-florante-700 hover:bg-florante-50"
+                className="rounded-full border border-florante-200 py-3 text-sm font-medium text-florante-700 hover:bg-florante-50 transition-colors"
               >
                 Close
               </button>
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
+          <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4 bg-white">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1.5">Full name *</label>
@@ -245,13 +246,13 @@ export function TalkModal() {
                 <a
                   href="https://wa.me/254770428297?text=Hello%20Florante%2C%20I%20have%20an%20enquiry."
                   target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-full border border-florante-200 py-2.5 text-sm font-medium text-florante-700 hover:bg-florante-50"
+                  className="flex items-center justify-center gap-2 rounded-full border border-florante-200 py-2.5 text-sm font-medium text-florante-700 hover:bg-florante-50 transition-colors"
                 >
                   <IconWhatsApp size={15} /> WhatsApp
                 </a>
                 <a
                   href="mailto:florantej@gmail.com"
-                  className="flex items-center justify-center gap-2 rounded-full border border-florante-200 py-2.5 text-sm font-medium text-florante-700 hover:bg-florante-50"
+                  className="flex items-center justify-center gap-2 rounded-full border border-florante-200 py-2.5 text-sm font-medium text-florante-700 hover:bg-florante-50 transition-colors"
                 >
                   <IconMail size={15} /> Email us
                 </a>

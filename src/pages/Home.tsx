@@ -12,42 +12,43 @@ import {
   IconSparkles, IconGlobe, IconQuote, IconCheck, IconUsers, IconTarget,
   IconAward,
 } from "../components/icons";
+//import Spline from '@splinetool/react-spline'; // Import the official component
 
 const capabilities = [
   { title: "AI & Machine Learning", Icon: IconSparkles },
-  { title: "Cybersecurity",         Icon: IconShield },
-  { title: "Custom Software",       Icon: IconCode },
-  { title: "Digital Transformation",Icon: IconLayers },
-  { title: "Data Engineering",      Icon: IconChart },
-  { title: "Automation",            Icon: IconBolt },
+  { title: "Cybersecurity", Icon: IconShield },
+  { title: "Custom Software", Icon: IconCode },
+  { title: "Digital Transformation", Icon: IconLayers },
+  { title: "Data Engineering", Icon: IconChart },
+  { title: "Automation", Icon: IconBolt },
 ];
 
 const problems = [
-  { title: "Automate Operations",     text: "Replace repetitive manual work with intelligent automation that runs 24/7.", Icon: IconBolt },
-  { title: "Build Digital Platforms", text: "Scalable web and mobile systems designed to grow with your organization.",   Icon: IconCode },
-  { title: "Protect Digital Assets",  text: "Stronger cybersecurity and resilience against modern digital threats.",      Icon: IconShield },
-  { title: "Modernize the Enterprise",text: "Retire disconnected spreadsheets and silos in favour of connected systems.", Icon: IconLayers },
-  { title: "Turn Data Into Decisions",text: "Use analytics and AI to surface the intelligence hiding inside your data.",  Icon: IconChart },
+  { title: "Automate Operations", text: "Replace repetitive manual work with intelligent automation that runs 24/7.", Icon: IconBolt },
+  { title: "Build Digital Platforms", text: "Scalable web and mobile systems designed to grow with your organization.", Icon: IconCode },
+  { title: "Protect Digital Assets", text: "Stronger cybersecurity and resilience against modern digital threats.", Icon: IconShield },
+  { title: "Modernize the Enterprise", text: "Retire disconnected spreadsheets and silos in favour of connected systems.", Icon: IconLayers },
+  { title: "Turn Data Into Decisions", text: "Use analytics and AI to surface the intelligence hiding inside your data.", Icon: IconChart },
 ];
 
 const stats = [
-  { value: "25+",  label: "Projects delivered",     Icon: IconTarget },
-  { value: "12+",  label: "Organizations served",   Icon: IconUsers },
-  { value: "5+",   label: "Products deployed",      Icon: IconAward },
-  { value: "3",    label: "Countries reached",      Icon: IconGlobe },
+  { value: "25+", label: "Projects delivered", Icon: IconTarget },
+  { value: "12+", label: "Organizations served", Icon: IconUsers },
+  { value: "5+", label: "Products deployed", Icon: IconAward },
+  { value: "3", label: "Countries reached", Icon: IconGlobe },
 ];
 
 const solutionIcons = [IconSparkles, IconShield, IconCode, IconLayers, IconChart, IconBolt];
 
 export function Home() {
-  const solutions    = useApi<Solution[]>("solutions/");
-  const products     = useApi<Product[]>("products/");
+  const solutions = useApi<Solution[]>("solutions/");
+  const products = useApi<Product[]>("products/");
   const testimonials = useApi<Testimonial[]>("testimonials/");
   const { openModal } = useTalkModal();
 
-  const hasProducts      = (products.data?.length ?? 0) > 0;
-  const hasTestimonials  = (testimonials.data?.length ?? 0) > 0;
-  const showProducts     = products.loading     || products.error     || hasProducts;
+  const hasProducts = (products.data?.length ?? 0) > 0;
+  const hasTestimonials = (testimonials.data?.length ?? 0) > 0;
+  const showProducts = products.loading || products.error || hasProducts;
   const showTestimonials = testimonials.loading || testimonials.error || hasTestimonials;
 
   return (
@@ -58,6 +59,16 @@ export function Home() {
         <div className="pointer-events-none absolute inset-0 bg-hero-mesh" />
         <div className="pointer-events-none absolute -left-40 top-10 h-[28rem] w-[28rem] animate-blob rounded-full bg-accent/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 animate-blob rounded-full bg-florante-400/20 blur-3xl [animation-delay:4s]" />
+
+        {/* --- PROFESSIONAL VIDEO / 3D RENDER BACKGROUND ASSET --- */}
+        <div className="absolute inset-0 -z-10 hidden lg:block pointer-events-none opacity-85">
+          <div className="w-full h-full scale-110 translate-y-10">
+            {/* Replace the scene URL with your exported public Spline scene link */}
+            {/*<Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />*/}
+          </div>
+          {/* Gradient fade to merge edges smoothly into your background */}
+          <div className="absolute inset-0 bg-gradient-to-t from-green-grad via-transparent to-green-grad opacity-50 pointer-events-none"></div>
+        </div>
 
         <div className="container-page relative pt-28 pb-16 text-center sm:pt-36 sm:pb-24 md:pt-40 md:pb-32 lg:pt-44 lg:pb-36">
           <div className="mx-auto max-w-3xl">
@@ -182,28 +193,28 @@ export function Home() {
           </div>
 
           {solutions.loading ? <Spinner label="Loading solutions…" /> :
-           solutions.error   ? <ErrorState message={solutions.error} onRetry={solutions.reload} /> : (
-            <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:snap-none md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3">
-              {(solutions.data ?? []).map((s, i) => {
-                const Icon = solutionIcons[i % solutionIcons.length];
-                return (
-                  <Reveal key={s.slug} delay={i * 50} className="w-[82%] shrink-0 snap-center md:w-auto">
-                    <Link to={`/solutions/${s.slug}`} className="group relative flex h-full flex-col rounded-2xl border border-florante-100 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-florante-200 hover:shadow-lift">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-florante-50 text-florante-700 transition-colors duration-300 group-hover:bg-green-grad group-hover:text-white">
-                        <Icon size={20} />
-                      </span>
-                      <h3 className="mt-5 font-heading text-lg font-bold text-florante-800">{s.title}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-500">{s.short_description}</p>
-                      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-florante-700 transition-colors group-hover:text-florante-900">
-                        {s.cta_text || "Learn more"}
-                        <IconArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                      </span>
-                    </Link>
-                  </Reveal>
-                );
-              })}
-            </div>
-          )}
+            solutions.error ? <ErrorState message={solutions.error} onRetry={solutions.reload} /> : (
+              <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:snap-none md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3">
+                {(solutions.data ?? []).map((s, i) => {
+                  const Icon = solutionIcons[i % solutionIcons.length];
+                  return (
+                    <Reveal key={s.slug} delay={i * 50} className="w-[82%] shrink-0 snap-center md:w-auto">
+                      <Link to={`/solutions/${s.slug}`} className="group relative flex h-full flex-col rounded-2xl border border-florante-100 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-florante-200 hover:shadow-lift">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-florante-50 text-florante-700 transition-colors duration-300 group-hover:bg-green-grad group-hover:text-white">
+                          <Icon size={20} />
+                        </span>
+                        <h3 className="mt-5 font-heading text-lg font-bold text-florante-800">{s.title}</h3>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-500">{s.short_description}</p>
+                        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-florante-700 transition-colors group-hover:text-florante-900">
+                          {s.cta_text || "Learn more"}
+                          <IconArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                        </span>
+                      </Link>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            )}
         </div>
       </section>
 
@@ -229,33 +240,33 @@ export function Home() {
             </div>
 
             {products.loading ? <Spinner label="Loading products…" /> :
-             products.error   ? <ErrorState message={products.error} onRetry={products.reload} /> : (
-              <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:snap-none md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3">
-                {(products.data ?? []).map((p, i) => (
-                  <Reveal key={p.slug} delay={i * 50} className="w-[82%] shrink-0 snap-center md:w-auto">
-                    <Link to={`/products/${p.slug}`} className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-white/10">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-semibold uppercase tracking-widest text-accent/70">{p.category}</span>
-                        <span className={`pill ${p.status === "available" ? "pill-green" : "bg-amber-900/40 text-amber-300"}`}>
-                          {p.status.replace("_", " ")}
-                        </span>
-                      </div>
-                      <h3 className="mt-4 font-heading text-lg font-bold text-white">{p.name}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.short_description}</p>
-                      {p.problem_solved && (
-                        <p className="mt-3 text-xs text-white/40 italic line-clamp-2">{p.problem_solved}</p>
-                      )}
-                      <div className="mt-5 flex items-center justify-between">
-                        <span className="font-heading text-sm font-bold text-accent">{p.pricing || "Custom quote"}</span>
-                        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white transition-colors group-hover:bg-accent group-hover:text-florante-950">
-                          <IconArrowRight size={14} />
-                        </span>
-                      </div>
-                    </Link>
-                  </Reveal>
-                ))}
-              </div>
-            )}
+              products.error ? <ErrorState message={products.error} onRetry={products.reload} /> : (
+                <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:snap-none md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3">
+                  {(products.data ?? []).map((p, i) => (
+                    <Reveal key={p.slug} delay={i * 50} className="w-[82%] shrink-0 snap-center md:w-auto">
+                      <Link to={`/products/${p.slug}`} className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-white/10">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-semibold uppercase tracking-widest text-accent/70">{p.category}</span>
+                          <span className={`pill ${p.status === "available" ? "pill-green" : "bg-amber-900/40 text-amber-300"}`}>
+                            {p.status.replace("_", " ")}
+                          </span>
+                        </div>
+                        <h3 className="mt-4 font-heading text-lg font-bold text-white">{p.name}</h3>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{p.short_description}</p>
+                        {p.problem_solved && (
+                          <p className="mt-3 text-xs text-white/40 italic line-clamp-2">{p.problem_solved}</p>
+                        )}
+                        <div className="mt-5 flex items-center justify-between">
+                          <span className="font-heading text-sm font-bold text-accent">{p.pricing || "Custom quote"}</span>
+                          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white transition-colors group-hover:bg-accent group-hover:text-florante-950">
+                            <IconArrowRight size={14} />
+                          </span>
+                        </div>
+                      </Link>
+                    </Reveal>
+                  ))}
+                </div>
+              )}
           </div>
         </section>
       )}
@@ -271,29 +282,29 @@ export function Home() {
               subtitle="Real results from real partnerships across the continent."
             />
             {testimonials.loading ? <Spinner label="Loading…" /> :
-             testimonials.error   ? <ErrorState message={testimonials.error} onRetry={testimonials.reload} /> : (
-              <div className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 lg:grid lg:snap-none lg:grid-cols-2 lg:overflow-visible lg:pb-0">
-                {(testimonials.data ?? []).map((t) => (
-                  <Reveal key={t.id} className="w-[85%] shrink-0 snap-center sm:w-[60%] lg:w-auto">
-                    <figure className="relative flex h-full flex-col rounded-2xl border border-florante-100 bg-white p-6 shadow-soft">
-                      <IconQuote size={28} className="text-florante-200 shrink-0" />
-                      <blockquote className="mt-4 flex-1 font-heading text-lg font-medium leading-relaxed tracking-tight text-florante-800">
-                        "{t.quote}"
-                      </blockquote>
-                      <figcaption className="mt-6 flex items-center gap-3 border-t border-florante-50 pt-5">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-grad font-heading text-sm font-bold text-white">
-                          {t.author.split(" ").map((n) => n[0]).slice(0, 2).join("")}
-                        </span>
-                        <div>
-                          <p className="text-sm font-semibold text-florante-900">{t.author}</p>
-                          <p className="text-xs text-gray-400">{[t.role, t.company].filter(Boolean).join(" · ")}</p>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </Reveal>
-                ))}
-              </div>
-            )}
+              testimonials.error ? <ErrorState message={testimonials.error} onRetry={testimonials.reload} /> : (
+                <div className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 lg:grid lg:snap-none lg:grid-cols-2 lg:overflow-visible lg:pb-0">
+                  {(testimonials.data ?? []).map((t) => (
+                    <Reveal key={t.id} className="w-[85%] shrink-0 snap-center sm:w-[60%] lg:w-auto">
+                      <figure className="relative flex h-full flex-col rounded-2xl border border-florante-100 bg-white p-6 shadow-soft">
+                        <IconQuote size={28} className="text-florante-200 shrink-0" />
+                        <blockquote className="mt-4 flex-1 font-heading text-lg font-medium leading-relaxed tracking-tight text-florante-800">
+                          "{t.quote}"
+                        </blockquote>
+                        <figcaption className="mt-6 flex items-center gap-3 border-t border-florante-50 pt-5">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-grad font-heading text-sm font-bold text-white">
+                            {t.author.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                          </span>
+                          <div>
+                            <p className="text-sm font-semibold text-florante-900">{t.author}</p>
+                            <p className="text-xs text-gray-400">{[t.role, t.company].filter(Boolean).join(" · ")}</p>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </Reveal>
+                  ))}
+                </div>
+              )}
           </div>
         </section>
       )}
@@ -308,10 +319,10 @@ export function Home() {
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { label: "Education",          slug: "education",         desc: "Platforms for universities & institutions",       color: "bg-indigo-50 text-indigo-600 border-indigo-100" },
-              { label: "SMEs",               slug: "smes",              desc: "Affordable systems for growing businesses",       color: "bg-sky-50 text-sky-600 border-sky-100" },
-              { label: "Financial Services", slug: "financial-services", desc: "Secure fintech & compliance technology",          color: "bg-amber-50 text-amber-600 border-amber-100" },
-              { label: "Organizations",      slug: "organizations",     desc: "Enterprise & NGO digital transformation",         color: "bg-violet-50 text-violet-600 border-violet-100" },
+              { label: "Education", slug: "education", desc: "Platforms for universities & institutions", color: "bg-indigo-50 text-indigo-600 border-indigo-100" },
+              { label: "SMEs", slug: "smes", desc: "Affordable systems for growing businesses", color: "bg-sky-50 text-sky-600 border-sky-100" },
+              { label: "Financial Services", slug: "financial-services", desc: "Secure fintech & compliance technology", color: "bg-amber-50 text-amber-600 border-amber-100" },
+              { label: "Organizations", slug: "organizations", desc: "Enterprise & NGO digital transformation", color: "bg-violet-50 text-violet-600 border-violet-100" },
             ].map(({ label, slug, desc, color }, i) => (
               <Reveal key={slug} delay={i * 60}>
                 <Link to={`/industries/${slug}`} className={`group flex flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift ${color}`}>
