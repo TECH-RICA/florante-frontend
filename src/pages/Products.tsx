@@ -104,9 +104,8 @@ export function Products() {
                 <div className="flex flex-wrap items-center gap-1.5">
                   <button
                     onClick={() => setCategory("")}
-                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-                      !category ? "bg-florante-700 text-white" : "bg-florante-50 text-gray-600 hover:text-florante-700"
-                    }`}
+                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${!category ? "bg-florante-700 text-white" : "bg-florante-50 text-gray-600 hover:text-florante-700"
+                      }`}
                   >
                     All Categories
                   </button>
@@ -114,9 +113,8 @@ export function Products() {
                     <button
                       key={c}
                       onClick={() => setCategory(c)}
-                      className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-                        category === c ? "bg-florante-700 text-white" : "bg-florante-50 text-gray-600 hover:text-florante-700"
-                      }`}
+                      className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${category === c ? "bg-florante-700 text-white" : "bg-florante-50 text-gray-600 hover:text-florante-700"
+                        }`}
                     >
                       {c}
                     </button>
@@ -271,11 +269,10 @@ export function Products() {
                             {p.name}
                           </Link>
                           <span
-                            className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold capitalize ${
-                              p.status === "available"
+                            className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold capitalize ${p.status === "available"
                                 ? "bg-accent/10 text-accent-dark"
                                 : "bg-amber-50 text-amber-600"
-                            }`}
+                              }`}
                           >
                             {p.status.replace("_", " ")}
                           </span>

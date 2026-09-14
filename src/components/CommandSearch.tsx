@@ -72,11 +72,11 @@ export function CommandSearch({ isOpen, onClose }: { isOpen: boolean; onClose: (
 
   const filtered = query.trim()
     ? ITEMS.filter(
-        (item) =>
-          item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.desc.toLowerCase().includes(query.toLowerCase()) ||
-          item.category.toLowerCase().includes(query.toLowerCase())
-      )
+      (item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.desc.toLowerCase().includes(query.toLowerCase()) ||
+        item.category.toLowerCase().includes(query.toLowerCase())
+    )
     : ITEMS.slice(0, 6);
 
   const handleSelect = (url: string) => {
@@ -86,14 +86,15 @@ export function CommandSearch({ isOpen, onClose }: { isOpen: boolean; onClose: (
 
   return (
     <div
-      className="modal-backdrop"
+      className="modal-backdrop-root"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="modal-panel animate-scale-in max-w-2xl bg-white shadow-mega rounded-2xl overflow-hidden my-auto mx-4 sm:mx-auto">
+      {/* Universal Blooming Modal Panel with Circling Glow */}
+      <div className="modal-panel-blooming max-w-2xl bg-white shadow-mega rounded-2xl overflow-hidden my-auto mx-4 sm:mx-auto flex flex-col no-scrollbar">
         {/* Search Input Bar */}
-        <div className="relative flex items-center border-b border-florante-100 px-4 py-3.5 bg-florante-50/50">
+        <div className="relative flex items-center border-b border-florante-100 px-4 py-3.5 bg-florante-50/50 shrink-0">
           <IconSearch size={20} className="text-florante-500 shrink-0" />
           <input
             ref={inputRef}
@@ -105,14 +106,14 @@ export function CommandSearch({ isOpen, onClose }: { isOpen: boolean; onClose: (
           />
           <button
             onClick={onClose}
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-gray-200/60 text-gray-500 hover:bg-gray-200 hover:text-gray-700"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-200/60 text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors"
           >
             <IconClose size={15} />
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-[60vh] overflow-y-auto p-2">
+        <div className="max-h-[60vh] overflow-y-auto p-2 flex-1 bg-white">
           {filtered.length === 0 ? (
             <div className="py-10 text-center text-sm text-gray-500">
               No results found for "<span className="font-semibold">{query}</span>"
@@ -145,7 +146,7 @@ export function CommandSearch({ isOpen, onClose }: { isOpen: boolean; onClose: (
             </div>
           )}
         </div>
-        <div className="border-t border-florante-100 bg-gray-50/80 px-4 py-2 text-right">
+        <div className="border-t border-florante-100 bg-gray-50/80 px-4 py-2 text-right shrink-0">
           <span className="text-[11px] text-gray-400 font-medium">Use <kbd className="rounded bg-white px-1.5 py-0.5 text-[10px] shadow-sm border border-gray-200">Ctrl</kbd> + <kbd className="rounded bg-white px-1.5 py-0.5 text-[10px] shadow-sm border border-gray-200">K</kbd> to toggle search</span>
         </div>
       </div>

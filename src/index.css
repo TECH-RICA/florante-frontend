@@ -9,7 +9,7 @@
     overflow-x: hidden;
   }
 
-  /* Modal dialogs CSS*/
+  /*___________Modal dialogs CSS__________________*/
 
   /* Continuous Circling Glow for Modals */
   .modal-panel-blooming,
@@ -392,16 +392,7 @@
     @apply border-t border-florante-100;
   }
 
-  /* ─── Talk modal ─────────────────────────────────────── */
-  .modal-backdrop {
-    @apply fixed inset-0 z-[200] flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm sm:items-center sm:p-4;
-  }
 
-  .modal-panel {
-    @apply relative w-full max-w-lg overflow-hidden rounded-t-[2rem] bg-white shadow-mega sm:rounded-[2rem];
-    max-height: 92dvh;
-    overflow-y: auto;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
