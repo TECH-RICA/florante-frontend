@@ -12,7 +12,7 @@ import {
   IconSparkles, IconGlobe, IconQuote, IconCheck, IconUsers, IconTarget,
   IconAward,
 } from "../components/icons";
-//import Spline from '@splinetool/react-spline'; // Import the official component
+import { useRef, useEffect } from "react";
 
 const capabilities = [
   { title: "AI & Machine Learning", Icon: IconSparkles },
@@ -51,6 +51,16 @@ export function Home() {
   const showProducts = products.loading || products.error || hasProducts;
   const showTestimonials = testimonials.loading || testimonials.error || hasTestimonials;
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        console.log("Autoplay was prevented:", error);
+      });
+    }
+  }, []);
+
   return (
     <>
       {/* ── HERO ── */}
@@ -60,14 +70,27 @@ export function Home() {
         <div className="pointer-events-none absolute -left-40 top-10 h-[28rem] w-[28rem] animate-blob rounded-full bg-accent/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 animate-blob rounded-full bg-florante-400/20 blur-3xl [animation-delay:4s]" />
 
-        {/* --- PROFESSIONAL VIDEO / 3D RENDER BACKGROUND ASSET --- */}
-        <div className="absolute inset-0 -z-10 hidden lg:block pointer-events-none opacity-85">
-          <div className="w-full h-full scale-110 translate-y-10">
-            {/* Replace the scene URL with your exported public Spline scene link */}
-            {/*<Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />*/}
+        {/* --- 1. VIDEO LAYER (Forced playback via ref) --- */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute left-0 top-0 h-full w-full lg:w-[60%] opacity-90"
+            style={{
+              WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)",
+              maskImage: "linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)"
+            }}
+          >
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover"
+              onEnded={(e) => e.currentTarget.pause()}
+            >
+              <source src={`${import.meta.env.BASE_URL}hero-bg.mp4`} type="video/mp4" />
+            </video>
           </div>
-          {/* Gradient fade to merge edges smoothly into your background */}
-          <div className="absolute inset-0 bg-gradient-to-t from-green-grad via-transparent to-green-grad opacity-50 pointer-events-none"></div>
         </div>
 
         <div className="container-page relative pt-28 pb-16 text-center sm:pt-36 sm:pb-24 md:pt-40 md:pb-32 lg:pt-44 lg:pb-36">
@@ -106,11 +129,6 @@ export function Home() {
                   </CTAButton>
                 </div>
               </div>
-            </Reveal>
-            <Reveal delay={360}>
-              <p className="mt-6 hidden text-xs font-semibold uppercase tracking-[0.2em] text-florante-100/50 sm:block sm:mt-8">
-                AI · Cybersecurity · Software · Digital Transformation
-              </p>
             </Reveal>
           </div>
 
