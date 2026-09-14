@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IconArrowRight, IconMail, IconWhatsApp, IconLinkedIn, IconTwitter, IconGitHub, IconMapPin } from "./icons";
+import faviconLogo from "/favicon.svg";
 
 const columns = [
   {
@@ -55,8 +56,8 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/60 backdrop-blur">
                 <img
-                  src="public/favicon.svg"
-                  alt="Florante Green Tech Logo"
+                  src={faviconLogo}
+                  alt=""
                   className="h-full w-full transition-transform group-hover:scale-105"
                 />
               </span>

@@ -8,6 +8,7 @@ import {
 } from "./icons";
 import { useTalkModal } from "../hooks/useTalkModal";
 import { useSearchModal } from "../hooks/useSearchModal";
+import faviconLogo from "/favicon.svg";
 
 interface NavItem {
   label: string;
@@ -203,8 +204,8 @@ export function Navbar() {
           <Link to="/" className="hidden lg:flex group items-center gap-2.5 shrink-0">
             <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white/60 backdrop-blur">
               <img
-                src="public/favicon.svg"
-                alt="Florante Green Tech Logo"
+                src={faviconLogo}
+                alt=""
                 className="h-full w-full transition-transform group-hover:scale-105"
               />
             </span>
