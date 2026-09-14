@@ -188,11 +188,12 @@ export function Navbar() {
               <IconMenu size={20} />
             </button>
             <Link to="/" className="group flex items-center gap-2 shrink-0">
-              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/10 backdrop-blur">
-                <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
-                  <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
-                  <path d="M13 20.5L24 27l11-6.5M24 27v10.5" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/60 backdrop-blur">
+                <img
+                  src={faviconLogo}
+                  alt=""
+                  className="h-full w-full transition-transform group-hover:scale-105"
+                />
               </span>
               <span className="font-heading text-base font-bold tracking-tight text-white">
                 Florante<span className="text-accent">.</span>
