@@ -5,40 +5,40 @@ const columns = [
   {
     title: "Solutions",
     links: [
-      { label: "AI & Automation",        href: "/solutions/ai-automation" },
-      { label: "Cybersecurity",          href: "/solutions/cybersecurity" },
-      { label: "Software Engineering",   href: "/solutions/software-engineering" },
+      { label: "AI & Automation", href: "/solutions/ai-automation" },
+      { label: "Cybersecurity", href: "/solutions/cybersecurity" },
+      { label: "Software Engineering", href: "/solutions/software-engineering" },
       { label: "Digital Transformation", href: "/solutions/digital-transformation" },
-      { label: "Data & Intelligence",    href: "/solutions/data-intelligence" },
+      { label: "Data & Intelligence", href: "/solutions/data-intelligence" },
     ],
   },
   {
     title: "Industries",
     links: [
-      { label: "Education",          href: "/industries/education" },
-      { label: "SMEs",               href: "/industries/smes" },
+      { label: "Education", href: "/industries/education" },
+      { label: "SMEs", href: "/industries/smes" },
       { label: "Financial Services", href: "/industries/financial-services" },
-      { label: "Organizations",      href: "/industries/organizations" },
+      { label: "Organizations", href: "/industries/organizations" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About",          href: "/about" },
-      { label: "Products",       href: "/products" },
-      { label: "Florante Labs",  href: "/labs" },
-      { label: "Careers",        href: "/careers" },
-      { label: "Partners",       href: "/partners" },
-      { label: "Insights",       href: "/insights" },
+      { label: "About", href: "/about" },
+      { label: "Products", href: "/products" },
+      { label: "Florante Labs", href: "/labs" },
+      { label: "Careers", href: "/careers" },
+      { label: "Partners", href: "/partners" },
+      { label: "Insights", href: "/insights" },
     ],
   },
 ];
 
 const socials = [
   { label: "WhatsApp", href: "https://wa.me/254770428297", Icon: IconWhatsApp },
-  { label: "LinkedIn", href: "#",                          Icon: IconLinkedIn },
-  { label: "Twitter",  href: "#",                          Icon: IconTwitter },
-  { label: "GitHub",   href: "#",                          Icon: IconGitHub },
+  { label: "LinkedIn", href: "#", Icon: IconLinkedIn },
+  { label: "Twitter", href: "#", Icon: IconTwitter },
+  { label: "GitHub", href: "#", Icon: IconGitHub },
 ];
 
 export function Footer() {
@@ -53,11 +53,12 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 backdrop-blur">
-                <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
-                  <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
-                  <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/60 backdrop-blur">
+                <img
+                  src="public/favicon.svg"
+                  alt="Florante Green Tech Logo"
+                  className="h-full w-full transition-transform group-hover:scale-105"
+                />
               </span>
               <span className="font-heading text-lg font-bold">
                 Florante<span className="text-accent">.</span>

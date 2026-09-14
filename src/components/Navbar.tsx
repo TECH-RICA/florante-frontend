@@ -24,51 +24,51 @@ interface NavGroup {
 }
 
 const SOLUTIONS: NavItem[] = [
-  { label: "AI & Automation",        href: "/solutions/ai-automation",        icon: <IconSparkles size={18} />, desc: "Intelligent systems that automate and predict" },
-  { label: "Cybersecurity",          href: "/solutions/cybersecurity",         icon: <IconShield size={18} />,   desc: "Protect systems, applications and data" },
-  { label: "Software Engineering",   href: "/solutions/software-engineering",  icon: <IconCode size={18} />,     desc: "Scalable web, mobile & enterprise platforms" },
-  { label: "Digital Transformation", href: "/solutions/digital-transformation",icon: <IconLayers size={18} />,   desc: "Modernize workflows and connected operations" },
-  { label: "Data & Intelligence",    href: "/solutions/data-intelligence",     icon: <IconChart size={18} />,    desc: "Turn data into actionable business insights" },
+  { label: "AI & Automation", href: "/solutions/ai-automation", icon: <IconSparkles size={18} />, desc: "Intelligent systems that automate and predict" },
+  { label: "Cybersecurity", href: "/solutions/cybersecurity", icon: <IconShield size={18} />, desc: "Protect systems, applications and data" },
+  { label: "Software Engineering", href: "/solutions/software-engineering", icon: <IconCode size={18} />, desc: "Scalable web, mobile & enterprise platforms" },
+  { label: "Digital Transformation", href: "/solutions/digital-transformation", icon: <IconLayers size={18} />, desc: "Modernize workflows and connected operations" },
+  { label: "Data & Intelligence", href: "/solutions/data-intelligence", icon: <IconChart size={18} />, desc: "Turn data into actionable business insights" },
 ];
 
 const INDUSTRIES: NavItem[] = [
-  { label: "Education",          href: "/industries/education",         icon: <IconGradCap size={18} />,  desc: "Platforms for universities & schools" },
-  { label: "SMEs",               href: "/industries/smes",              icon: <IconBriefcase size={18} />,desc: "Affordable tech for small businesses" },
-  { label: "Financial Services", href: "/industries/financial-services",icon: <IconBuilding size={18} />, desc: "Secure fintech & compliance systems" },
-  { label: "Organizations",      href: "/industries/organizations",     icon: <IconUsers size={18} />,    desc: "Enterprise & NGO digital systems" },
+  { label: "Education", href: "/industries/education", icon: <IconGradCap size={18} />, desc: "Platforms for universities & schools" },
+  { label: "SMEs", href: "/industries/smes", icon: <IconBriefcase size={18} />, desc: "Affordable tech for small businesses" },
+  { label: "Financial Services", href: "/industries/financial-services", icon: <IconBuilding size={18} />, desc: "Secure fintech & compliance systems" },
+  { label: "Organizations", href: "/industries/organizations", icon: <IconUsers size={18} />, desc: "Enterprise & NGO digital systems" },
 ];
 
 const COMPANY: NavItem[] = [
-  { label: "About Florante", href: "/about",    icon: <IconGlobe size={18} />,    desc: "Our story, mission and team" },
-  { label: "Florante Labs",  href: "/labs",     icon: <IconFlask size={18} />,    desc: "Hackathons, experiments and open projects" },
-  { label: "Careers",        href: "/careers",  icon: <IconBriefcase size={18} />,desc: "Join the Florante team" },
-  { label: "Partners",       href: "/partners", icon: <IconUsers size={18} />,    desc: "Institutions we work with" },
+  { label: "About Florante", href: "/about", icon: <IconGlobe size={18} />, desc: "Our story, mission and team" },
+  { label: "Florante Labs", href: "/labs", icon: <IconFlask size={18} />, desc: "Hackathons, experiments and open projects" },
+  { label: "Careers", href: "/careers", icon: <IconBriefcase size={18} />, desc: "Join the Florante team" },
+  { label: "Partners", href: "/partners", icon: <IconUsers size={18} />, desc: "Institutions we work with" },
 ];
 
 const NAV_GROUPS: NavGroup[] = [
   {
     label: "Home",
-    href:  "/",
+    href: "/",
     single: true,
   },
   {
     label: "Solutions",
-    href:  "/solutions",
+    href: "/solutions",
     children: [{ heading: "What we build", items: SOLUTIONS }],
   },
   {
     label: "Products",
-    href:  "/products",
+    href: "/products",
     single: true,
   },
   {
     label: "Industries",
-    href:  "/industries",
+    href: "/industries",
     children: [{ heading: "Who we serve", items: INDUSTRIES }],
   },
   {
     label: "Insights",
-    href:  "/insights",
+    href: "/insights",
     single: true,
   },
   {
@@ -130,8 +130,8 @@ function MegaMenu({ group, onClose }: { group: NavGroup; onClose: () => void }) 
 }
 
 export function Navbar() {
-  const [open, setOpen]           = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const location = useLocation();
@@ -190,7 +190,7 @@ export function Navbar() {
               <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white/10 backdrop-blur">
                 <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
                   <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
-                  <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M13 20.5L24 27l11-6.5M24 27v10.5" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <span className="font-heading text-base font-bold tracking-tight text-white">
@@ -201,11 +201,12 @@ export function Navbar() {
 
           {/* Desktop Logo */}
           <Link to="/" className="hidden lg:flex group items-center gap-2.5 shrink-0">
-            <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white/10 backdrop-blur">
-              <svg width="20" height="20" viewBox="0 0 48 48" fill="none" className="text-accent">
-                <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
-                <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+            <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white/60 backdrop-blur">
+              <img
+                src="public/favicon.svg"
+                alt="Florante Green Tech Logo"
+                className="h-full w-full transition-transform group-hover:scale-105"
+              />
             </span>
             <span className="font-heading text-lg font-bold tracking-tight text-white">
               Florante<span className="text-accent">.</span>
@@ -227,8 +228,7 @@ export function Navbar() {
                     to={group.href!}
                     end={false}
                     className={({ isActive }) =>
-                      `group relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                        isActive ? "text-white" : "text-white/75 hover:text-white"
+                      `group relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${isActive ? "text-white" : "text-white/75 hover:text-white"
                       }`
                     }
                   >
@@ -241,9 +241,8 @@ export function Navbar() {
                   </NavLink>
                 ) : (
                   <button
-                    className={`group relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                      activeMenu === group.label ? "text-white" : "text-white/75 hover:text-white"
-                    }`}
+                    className={`group relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${activeMenu === group.label ? "text-white" : "text-white/75 hover:text-white"
+                      }`}
                     onClick={() => setActiveMenu(activeMenu === group.label ? null : group.label)}
                   >
                     {group.label}
@@ -323,7 +322,7 @@ export function Navbar() {
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 backdrop-blur">
                       <svg width="18" height="18" viewBox="0 0 48 48" fill="none" className="text-accent">
                         <path d="M13 31V20.5L24 14l11 6.5V31l-11 6.5L13 31Z" stroke="currentColor" strokeWidth="3.4" strokeLinejoin="round" />
-                        <path d="M13 20.5L24 27l11-6.5M24 27v10.5"            stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M13 20.5L24 27l11-6.5M24 27v10.5" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <span className="font-heading text-base font-bold text-white">
