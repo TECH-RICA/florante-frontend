@@ -132,7 +132,7 @@ export function Home() {
             </Reveal>
           </div>
 
-          {/* Capability pills */}
+          {/* Capability pills 
           <Reveal delay={450} className="mt-10 sm:mt-14">
             <div className="border-t border-white/10 pt-6 sm:pt-8">
               <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 no-scrollbar sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0 sm:snap-none">
@@ -144,12 +144,24 @@ export function Home() {
                 ))}
               </div>
             </div>
-          </Reveal>
+          </Reveal>*/}
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden leading-none pointer-events-none">
+          <svg
+            className="relative block w-full h-12 sm:h-20 lg:h-28 text-white"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,32 C320,95 1120,95 1440,32 L1440,120 L0,120 Z"
+              fill="currentColor"
+            ></path>
+          </svg>
         </div>
       </section>
 
       {/* ── TRUST METRICS ── */}
-      <section className="bg-white py-14 md:py-16" data-track-section="trust">
+      <section className="bg-white py-14 md:py-16 relative z-30" data-track-section="trust">
         <div className="container-page">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {stats.map(({ value, label, Icon }, i) => (
