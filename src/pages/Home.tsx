@@ -14,14 +14,14 @@ import {
 } from "../components/icons";
 import { useRef, useEffect } from "react";
 
-const capabilities = [
+{/*const capabilities = [
   { title: "AI & Machine Learning", Icon: IconSparkles },
   { title: "Cybersecurity", Icon: IconShield },
   { title: "Custom Software", Icon: IconCode },
   { title: "Digital Transformation", Icon: IconLayers },
   { title: "Data Engineering", Icon: IconChart },
   { title: "Automation", Icon: IconBolt },
-];
+];*/}
 
 const problems = [
   { title: "Automate Operations", text: "Replace repetitive manual work with intelligent automation that runs 24/7.", Icon: IconBolt },
